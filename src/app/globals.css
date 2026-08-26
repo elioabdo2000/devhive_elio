@@ -1,0 +1,172 @@
+@import "tailwindcss";
+
+@theme {
+  /* Base surface + text */
+  --color-paper: #f7f8fa;
+  --color-paper-raised: #ffffff;
+  --color-ink: #12172b;
+  --color-ink-soft: #4b5468;
+  --color-ink-faint: #8891a5;
+  --color-border: #e2e5ec;
+  --color-border-strong: #cbd0dc;
+
+  /* Accent: teal (primary / interactive) */
+  --color-teal: #0f9d8c;
+  --color-teal-strong: #0b7d70;
+  --color-teal-soft: #e4f5f2;
+
+  /* Accent: amber (secondary / categories) */
+  --color-amber: #e8a33d;
+  --color-amber-soft: #fdf1df;
+
+  /* Status */
+  --color-danger: #d84f4f;
+  --color-danger-soft: #fbe9e9;
+  --color-success: #2f9e5b;
+  --color-success-soft: #e6f6ec;
+
+  --font-display: var(--font-space-grotesk);
+  --font-body: var(--font-plex-sans);
+  --font-mono: var(--font-plex-mono);
+}
+
+* {
+  border-color: var(--color-border);
+}
+
+body {
+  font-family: var(--font-body);
+  background-color: var(--color-paper);
+  color: var(--color-ink);
+}
+
+.font-display {
+  font-family: var(--font-display);
+}
+
+.font-mono {
+  font-family: var(--font-mono);
+}
+
+::selection {
+  background-color: var(--color-teal);
+  color: white;
+}
+
+/* Visible keyboard focus everywhere — required for accessibility, and
+   otherwise easy to lose track of once every button has a custom look. */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible,
+[tabindex]:focus-visible {
+  outline: 2px solid var(--color-teal);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* --- Signature motif -----------------------------------------------------
+   DevHive's visual identity leans on the git-diff gutter: a colored rule
+   down the left edge of anything that represents a unit of content someone
+   authored (a blog card, a community card). It's a small, literal nod to
+   the tool developers already read every day, used sparingly rather than
+   plastered everywhere. */
+
+.gutter-card {
+  position: relative;
+  border-left: 3px solid var(--color-teal);
+}
+
+.gutter-card--amber {
+  border-left-color: var(--color-amber);
+}
+
+/* Terminal-style window chrome, used once on the homepage hero as the
+   single "signature" element — a nod to the editor every visitor already
+   has open, not a decoration repeated throughout the site. */
+.term-window {
+  border-radius: 0.75rem;
+  border: 1px solid var(--color-border);
+  background: var(--color-paper-raised);
+  box-shadow: 0 20px 60px -30px rgba(18, 23, 43, 0.35);
+  overflow: hidden;
+}
+
+.term-titlebar {
+  display: flex;
+  align-items: center;
+  gap: 0.375rem;
+  padding: 0.6rem 0.85rem;
+  background: var(--color-ink);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.term-dot {
+  width: 0.55rem;
+  height: 0.55rem;
+  border-radius: 9999px;
+}
+
+/* Diff-style +/- markers for compact metadata (member counts, stats) */
+.diff-plus::before {
+  content: "+";
+  color: var(--color-success);
+  font-family: var(--font-mono);
+  margin-right: 0.15rem;
+}
+
+/* Rendered Markdown blog content */
+.md-content code {
+  font-family: var(--font-mono);
+  background: var(--color-teal-soft);
+  color: var(--color-teal-strong);
+  padding: 0.1rem 0.4rem;
+  border-radius: 0.3rem;
+  font-size: 0.875em;
+}
+
+.md-content pre {
+  background: var(--color-ink);
+  color: var(--color-paper);
+  padding: 1rem 1.1rem;
+  border-radius: 0.6rem;
+  overflow-x: auto;
+  font-size: 0.85em;
+  line-height: 1.6;
+}
+
+.md-content pre code {
+  background: transparent;
+  color: inherit;
+  padding: 0;
+}
+
+.md-content table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9em;
+}
+
+.md-content th,
+.md-content td {
+  border: 1px solid var(--color-border);
+  padding: 0.4rem 0.6rem;
+  text-align: left;
+}
+
+.md-content th {
+  background: var(--color-paper);
+  font-weight: 600;
+}
