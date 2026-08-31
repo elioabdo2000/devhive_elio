@@ -15,6 +15,15 @@ function readingTime(excerpt: string) {
   return Math.max(1, Math.ceil(excerpt.split(" ").length / 40));
 }
 
+function formatDate(dateString: string) {
+  return new Date(dateString).toLocaleDateString("en-US", {
+    year: "numeric",
+    month: "short",
+    day: "numeric",
+    timeZone: "UTC",
+  });
+}
+
 export default function BlogCard({ blog }: BlogCardProps) {
   return (
     <Link
@@ -24,7 +33,7 @@ export default function BlogCard({ blog }: BlogCardProps) {
       <div className="font-mono mb-3 flex items-center gap-2 text-xs text-ink-soft">
         <span className="text-teal">@{blog.author.username}</span>
         <span>·</span>
-        <span>{blog.publishedAt && new Date(blog.publishedAt).toLocaleDateString()}</span>
+        <span>{blog.publishedAt && formatDate(blog.publishedAt)}</span>
         <span>·</span>
         <span>{readingTime(blog.excerpt)} min read</span>
       </div>
