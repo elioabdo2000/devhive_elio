@@ -82,7 +82,7 @@ export default function ImageUpload({ label, value, onChange, folder, shape = "w
           {uploading ? "Uploading..." : value ? "Change image" : "Upload from computer"}
         </button>
         {value && !uploading && (
-          <button type="button" onClick={() => onChange("")} className="text-sm text-red-600 hover:underline">
+          <button type="button" onClick={() => onChange("")} className="text-sm text-danger hover:underline">
             Remove
           </button>
         )}
@@ -97,7 +97,7 @@ export default function ImageUpload({ label, value, onChange, folder, shape = "w
         aria-label={label}
       />
 
-      {(localError || error) && <p className="mt-1 text-xs text-red-600">{localError || error}</p>}
+      {(localError || error) && <p className="mt-1 text-xs text-danger">{localError || error}</p>}
     </div>
   );
 }

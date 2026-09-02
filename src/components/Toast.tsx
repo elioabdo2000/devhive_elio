@@ -50,7 +50,7 @@ export default function ToastProvider({ children }: { children: React.ReactNode 
             key={t.id}
             role={t.kind === "error" ? "alert" : "status"}
             aria-live={t.kind === "error" ? "assertive" : "polite"}
-            className={`pointer-events-auto flex w-full max-w-sm items-start gap-3 rounded-lg border bg-white px-4 py-3 text-sm shadow-lg sm:w-auto ${
+            className={`pointer-events-auto flex w-full max-w-sm items-start gap-3 rounded-lg border bg-paper-raised px-4 py-3 text-sm shadow-lg sm:w-auto ${
               t.kind === "error" ? "border-danger/30 text-danger" : "border-teal/30 text-ink"
             }`}
           >

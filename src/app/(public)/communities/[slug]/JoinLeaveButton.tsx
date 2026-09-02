@@ -63,7 +63,7 @@ export default function JoinLeaveButton({
         {loading ? "..." : isMember ? "Leave community" : "Join community"}
       </button>
       {error && (
-        <p role="alert" className="mt-1 text-xs text-red-600">
+        <p role="alert" className="mt-1 text-xs text-danger">
           {error}
         </p>
       )}

@@ -123,7 +123,7 @@ export default function BlogForm({ mode, blogId, initialData }: BlogFormProps) {
       <h1 className="font-display text-2xl font-semibold">{mode === "create" ? "Write a new blog" : "Edit blog"}</h1>
 
       {formError && (
-        <div role="alert" className="rounded-lg bg-red-50 px-4 py-2 text-sm text-red-700">
+        <div role="alert" className="rounded-lg bg-danger-soft px-4 py-2 text-sm text-danger">
           {formError}
         </div>
       )}
@@ -141,7 +141,7 @@ export default function BlogForm({ mode, blogId, initialData }: BlogFormProps) {
           className={inputClass}
         />
         {errors.title && (
-          <p id="blog-title-error" className="mt-1 text-xs text-red-600">
+          <p id="blog-title-error" className="mt-1 text-xs text-danger">
             {errors.title}
           </p>
         )}
@@ -164,7 +164,7 @@ export default function BlogForm({ mode, blogId, initialData }: BlogFormProps) {
           className={inputClass}
         />
         {errors.slug && (
-          <p id="blog-slug-error" className="mt-1 text-xs text-red-600">
+          <p id="blog-slug-error" className="mt-1 text-xs text-danger">
             {errors.slug}
           </p>
         )}
@@ -184,7 +184,7 @@ export default function BlogForm({ mode, blogId, initialData }: BlogFormProps) {
           className={inputClass}
         />
         {errors.excerpt && (
-          <p id="blog-excerpt-error" className="mt-1 text-xs text-red-600">
+          <p id="blog-excerpt-error" className="mt-1 text-xs text-danger">
             {errors.excerpt}
           </p>
         )}
@@ -204,7 +204,7 @@ export default function BlogForm({ mode, blogId, initialData }: BlogFormProps) {
           className={inputClass}
         />
         {errors.content && (
-          <p id="blog-content-error" className="mt-1 text-xs text-red-600">
+          <p id="blog-content-error" className="mt-1 text-xs text-danger">
             {errors.content}
           </p>
         )}
@@ -235,7 +235,7 @@ export default function BlogForm({ mode, blogId, initialData }: BlogFormProps) {
           className={inputClass}
         />
         {errors.tags && (
-          <p id="blog-tags-error" className="mt-1 text-xs text-red-600">
+          <p id="blog-tags-error" className="mt-1 text-xs text-danger">
             {errors.tags}
           </p>
         )}

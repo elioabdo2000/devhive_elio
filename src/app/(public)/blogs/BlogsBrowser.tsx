@@ -125,7 +125,7 @@ export default function BlogsBrowser({ initialBlogs, initialTotal, pageSize }: B
       </form>
 
       {error && (
-        <div className="mt-6 rounded-lg bg-red-50 px-4 py-3 text-sm text-red-700">
+        <div className="mt-6 rounded-lg bg-danger-soft px-4 py-3 text-sm text-danger">
           {error} —{" "}
           <button type="button" onClick={() => setPage((p) => p)} className="font-medium underline">
             try again

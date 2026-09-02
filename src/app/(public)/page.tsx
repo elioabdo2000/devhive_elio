@@ -76,7 +76,7 @@ export default async function HomePage() {
 
   return (
     <div>
-      <section className="border-b border-border bg-white px-4 py-24">
+      <section className="border-b border-border bg-paper-raised px-4 py-24">
         <div className="mx-auto grid max-w-6xl items-center gap-12 lg:grid-cols-[1.1fr_0.9fr]">
           <div>
             <div className="font-mono mb-6 inline-flex items-center gap-2 rounded-full border border-border px-3 py-1 text-xs text-ink-soft">

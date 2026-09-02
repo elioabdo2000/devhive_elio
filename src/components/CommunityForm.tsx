@@ -100,7 +100,7 @@ export default function CommunityForm() {
       </p>
 
       {formError && (
-        <div role="alert" className="rounded-lg bg-red-50 px-4 py-2 text-sm text-red-700">
+        <div role="alert" className="rounded-lg bg-danger-soft px-4 py-2 text-sm text-danger">
           {formError}
         </div>
       )}
@@ -118,7 +118,7 @@ export default function CommunityForm() {
           className={inputClass}
         />
         {errors.name && (
-          <p id="community-name-error" className="mt-1 text-xs text-red-600">
+          <p id="community-name-error" className="mt-1 text-xs text-danger">
             {errors.name}
           </p>
         )}
@@ -141,7 +141,7 @@ export default function CommunityForm() {
           className={`${inputClass} font-mono`}
         />
         {errors.slug && (
-          <p id="community-slug-error" className="mt-1 text-xs text-red-600">
+          <p id="community-slug-error" className="mt-1 text-xs text-danger">
             {errors.slug}
           </p>
         )}
@@ -162,7 +162,7 @@ export default function CommunityForm() {
           className={inputClass}
         />
         {errors.description && (
-          <p id="community-description-error" className="mt-1 text-xs text-red-600">
+          <p id="community-description-error" className="mt-1 text-xs text-danger">
             {errors.description}
           </p>
         )}
@@ -176,7 +176,7 @@ export default function CommunityForm() {
           id="community-category"
           value={form.category}
           onChange={(e) => update("category", e.target.value)}
-          className={`${inputClass} bg-white`}
+          className={`${inputClass} bg-paper-raised`}
         >
           {CATEGORIES.map((c) => (
             <option key={c} value={c}>
@@ -184,7 +184,7 @@ export default function CommunityForm() {
             </option>
           ))}
         </select>
-        {errors.category && <p className="mt-1 text-xs text-red-600">{errors.category}</p>}
+        {errors.category && <p className="mt-1 text-xs text-danger">{errors.category}</p>}
       </div>
 
       <div>

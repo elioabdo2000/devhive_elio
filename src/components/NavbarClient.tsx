@@ -89,7 +89,7 @@ export default function NavbarClient() {
         <button
           onClick={handleLogout}
           disabled={loggingOut}
-          className="rounded-md px-3 py-2 text-left text-sm text-red-600 hover:bg-teal-soft disabled:opacity-50"
+          className="rounded-md px-3 py-2 text-left text-sm text-danger hover:bg-teal-soft disabled:opacity-50"
         >
           {loggingOut ? "Logging out..." : "Logout"}
         </button>
@@ -121,7 +121,7 @@ export default function NavbarClient() {
             </button>
 
             {menuOpen && (
-              <div role="menu" className="absolute right-0 mt-2 w-48 rounded-lg border border-border bg-white py-1 shadow-lg">
+              <div role="menu" className="absolute right-0 mt-2 w-48 rounded-lg border border-border bg-paper-raised py-1 shadow-lg">
                 <Link
                   href={`/profile/${user.username}`}
                   role="menuitem"
@@ -142,7 +142,7 @@ export default function NavbarClient() {
                   role="menuitem"
                   onClick={handleLogout}
                   disabled={loggingOut}
-                  className="block w-full px-4 py-2 text-left text-sm text-red-600 hover:bg-teal-soft disabled:opacity-50"
+                  className="block w-full px-4 py-2 text-left text-sm text-danger hover:bg-teal-soft disabled:opacity-50"
                 >
                   {loggingOut ? "Logging out..." : "Logout"}
                 </button>
@@ -176,7 +176,7 @@ export default function NavbarClient() {
       {mobileOpen && (
         <div
           id="mobile-nav-panel"
-          className="absolute inset-x-0 top-full border-b border-border bg-white px-4 py-4 shadow-lg md:hidden"
+          className="absolute inset-x-0 top-full border-b border-border bg-paper-raised px-4 py-4 shadow-lg md:hidden"
         >
           <nav className="font-mono flex flex-col gap-3 text-sm text-ink-soft">
             {navLinkList(() => setMobileOpen(false))}

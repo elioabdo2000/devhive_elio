@@ -23,12 +23,15 @@ export const loginSchema = z.object({
   termsAccepted: z.literal(true, { message: "You must accept the terms" }),
 });
 
-// Gates the OAuth buttons only — confirms the visitor's email and terms
-// acceptance with Zod before initiating the redirect. Deliberately excludes
-// `password`: OAuth credentials are handled entirely by Google/GitHub, and
-// this app must never collect them.
+// Gates the OAuth buttons on signup only — confirms terms acceptance before
+// initiating the redirect. Deliberately excludes `email` and `password`:
+// Google/GitHub supply the email themselves, and OAuth credentials are
+// handled entirely by the provider, so this app must never require either
+// here. (Previously this also required `email`, which meant anyone who
+// clicked "Continue with Google/GitHub" without first typing something into
+// the unrelated email field on the page got silently blocked — that was the
+// root cause of the reported OAuth login failures.)
 export const oauthPreAuthSchema = z.object({
-  email: z.string().trim().toLowerCase().email("Enter a valid email address"),
   termsAccepted: z.literal(true, { message: "You must accept the terms" }),
 });
 

@@ -65,38 +65,66 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
       // to a User document, so reject rather than creating an email-less user.
       if (!user.email) return false;
 
-      await connectDB();
-      const existing = await User.findOne({ email: user.email });
+      try {
+        await connectDB();
+        const existing = await User.findOne({ email: user.email });
 
-      if (!existing) {
-        const base = user.email.split("@")[0].toLowerCase().replace(/[^a-z0-9]/g, "");
-        let username = base;
-        let suffix = 1;
-        while (await User.findOne({ username })) {
-          username = `${base}${suffix}`;
-          suffix++;
+        if (!existing) {
+          const base = user.email.split("@")[0].toLowerCase().replace(/[^a-z0-9]/g, "") || "user";
+          let username = base;
+          let suffix = 1;
+          while (await User.findOne({ username })) {
+            username = `${base}${suffix}`;
+            suffix++;
+          }
+
+          // Two OAuth sign-ins with emails that collapse to the same base
+          // username (e.g. "a.b@x.com" and "a-b@x.com" both -> "ab") can
+          // race between the check above and this create — Mongo's unique
+          // index is the real guard, so retry once with a random suffix
+          // instead of surfacing a raw duplicate-key error to the user.
+          try {
+            await User.create({
+              name: user.name ?? username,
+              username,
+              email: user.email,
+              image: user.image,
+              skills: [],
+              providerIds: { [provider]: account.providerAccountId },
+            });
+          } catch (err: unknown) {
+            const isDupKey = typeof err === "object" && err !== null && "code" in err && (err as { code?: number }).code === 11000;
+            if (!isDupKey) throw err;
+            await User.create({
+              name: user.name ?? username,
+              username: `${username}${Math.floor(Math.random() * 10000)}`,
+              email: user.email,
+              image: user.image,
+              skills: [],
+              providerIds: { [provider]: account.providerAccountId },
+            });
+          }
+        } else {
+          const updates: Record<string, unknown> = {};
+          if (user.image && user.image !== existing.image) updates.image = user.image;
+          if (!existing.providerIds?.[provider]) {
+            updates[`providerIds.${provider}`] = account.providerAccountId;
+          }
+          if (Object.keys(updates).length > 0) {
+            await User.updateOne({ _id: existing._id }, { $set: updates });
+          }
         }
 
-        await User.create({
-          name: user.name ?? username,
-          username,
-          email: user.email,
-          image: user.image,
-          skills: [],
-          providerIds: { [provider]: account.providerAccountId },
-        });
-      } else {
-        const updates: Record<string, unknown> = {};
-        if (user.image && user.image !== existing.image) updates.image = user.image;
-        if (!existing.providerIds?.[provider]) {
-          updates[`providerIds.${provider}`] = account.providerAccountId;
-        }
-        if (Object.keys(updates).length > 0) {
-          await User.updateOne({ _id: existing._id }, { $set: updates });
-        }
+        return true;
+      } catch (err) {
+        // Any unexpected DB error here (e.g. a transient Atlas connection
+        // hiccup) would otherwise throw out of this callback and NextAuth
+        // would show a bare, unhelpful failure. Log it and fail the
+        // sign-in cleanly instead — the user lands back on /login?error=
+        // with a real message rather than a blank crash.
+        console.error(`OAuth signIn callback error (${provider}):`, err);
+        return false;
       }
-
-      return true;
     },
     async jwt({ token, user }) {
       if (user?.email) {

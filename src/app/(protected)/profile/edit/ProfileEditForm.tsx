@@ -96,7 +96,7 @@ export default function ProfileEditForm({ initialData, isNewProfile }: ProfileEd
 
   return (
     <div className="mx-auto max-w-xl px-4 py-12">
-      <div className="rounded-2xl border border-border bg-white p-8 shadow-sm">
+      <div className="rounded-2xl border border-border bg-paper-raised p-8 shadow-sm">
         <div className="mb-6 flex items-start justify-between">
           <div>
             <p className="font-mono mb-1 text-xs text-teal">{isNewProfile ? "one last step" : "/profile/edit"}</p>
@@ -120,7 +120,7 @@ export default function ProfileEditForm({ initialData, isNewProfile }: ProfileEd
         </div>
 
         {formError && (
-          <div role="alert" className="mb-4 rounded-lg bg-red-50 px-4 py-2 text-sm text-red-700">
+          <div role="alert" className="mb-4 rounded-lg bg-danger-soft px-4 py-2 text-sm text-danger">
             {formError}
           </div>
         )}
@@ -151,7 +151,7 @@ export default function ProfileEditForm({ initialData, isNewProfile }: ProfileEd
               />
             </div>
             {errors.username && (
-              <p id="profile-username-error" className="mt-1 text-xs text-red-600">
+              <p id="profile-username-error" className="mt-1 text-xs text-danger">
                 {errors.username}
               </p>
             )}
@@ -171,7 +171,7 @@ export default function ProfileEditForm({ initialData, isNewProfile }: ProfileEd
               className={inputClass}
             />
             {errors.headline && (
-              <p id="profile-headline-error" className="mt-1 text-xs text-red-600">
+              <p id="profile-headline-error" className="mt-1 text-xs text-danger">
                 {errors.headline}
               </p>
             )}
@@ -192,7 +192,7 @@ export default function ProfileEditForm({ initialData, isNewProfile }: ProfileEd
               className={inputClass}
             />
             {errors.bio && (
-              <p id="profile-bio-error" className="mt-1 text-xs text-red-600">
+              <p id="profile-bio-error" className="mt-1 text-xs text-danger">
                 {errors.bio}
               </p>
             )}
@@ -230,7 +230,7 @@ export default function ProfileEditForm({ initialData, isNewProfile }: ProfileEd
                 className={inputClass}
               />
               {errors.githubUrl && (
-                <p id="profile-github-error" className="mt-1 text-xs text-red-600">
+                <p id="profile-github-error" className="mt-1 text-xs text-danger">
                   {errors.githubUrl}
                 </p>
               )}
@@ -249,7 +249,7 @@ export default function ProfileEditForm({ initialData, isNewProfile }: ProfileEd
                 className={inputClass}
               />
               {errors.linkedinUrl && (
-                <p id="profile-linkedin-error" className="mt-1 text-xs text-red-600">
+                <p id="profile-linkedin-error" className="mt-1 text-xs text-danger">
                   {errors.linkedinUrl}
                 </p>
               )}

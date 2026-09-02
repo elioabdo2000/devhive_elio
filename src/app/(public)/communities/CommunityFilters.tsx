@@ -43,7 +43,7 @@ export default function CommunityFilters({
       <select
         value={initialCategory ?? ""}
         onChange={(e) => applyFilters(search, e.target.value || undefined)}
-        className="rounded-lg border border-border bg-white px-3 py-2 text-sm focus:border-teal focus:outline-none"
+        className="rounded-lg border border-border bg-paper-raised px-3 py-2 text-sm focus:border-teal focus:outline-none"
       >
         <option value="">All categories</option>
         {CATEGORIES.map((c) => (

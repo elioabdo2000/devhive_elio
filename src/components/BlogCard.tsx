@@ -28,7 +28,7 @@ export default function BlogCard({ blog }: BlogCardProps) {
   return (
     <Link
       href={`/blogs/${blog.slug}`}
-      className="gutter-card block rounded-r-lg bg-white p-5 shadow-sm transition hover:shadow-md hover:-translate-y-0.5"
+      className="gutter-card block rounded-r-lg bg-paper-raised p-5 shadow-sm transition hover:shadow-md hover:-translate-y-0.5"
     >
       <div className="font-mono mb-3 flex items-center gap-2 text-xs text-ink-soft">
         <span className="text-teal">@{blog.author.username}</span>
